@@ -1,0 +1,4 @@
+0 Caminhões Leves
+1 Caminhões Médios
+2 Caminhões Grandes
+3 Caminhões danificados

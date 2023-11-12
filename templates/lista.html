@@ -1,36 +1,15 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jogoteca</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classification</title>
 </head>
-
 <body>
-    <div class="container">
-        <div class="page-header">
-            <h1>{{ titulo }}</h1>
-        </div>
-        <table class="table table-striped table-responsive table-bordered">
-            <thead class="thead-default">
-                <tr>
-                    <th>Nome</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>God of War</td>
-                </tr>
-                <tr>
-                    <td>Skyrim</td>
-                </tr>
-                <tr>
-                    <td>Valorant</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <h1>Image Classification</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Classify</button>
+    </form>
 </body>
-
 </html>
