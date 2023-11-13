@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, jsonify
-import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
+from PIL import Image
+import io
+import tensorflow as tf
 
 app = Flask(__name__)
 
@@ -12,7 +14,7 @@ with open('labels.txt', 'r') as file:
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('lista.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -25,7 +27,8 @@ def predict():
         return jsonify({'error': 'No selected file'})
 
     # Processar a imagem
-    img = image.load_img(uploaded_file, target_size=(224, 224))
+    img = Image.open(io.BytesIO(uploaded_file.read()))
+    img = img.resize((224, 224))  # Redimensionar para o tamanho desejado
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     img_array /= 255.0
@@ -34,7 +37,7 @@ def predict():
     predictions = model.predict(img_array)
     predicted_class = classes[np.argmax(predictions)]
 
-    return jsonify({'prediction': predicted_class})
+    return jsonify({'Previsão': predicted_class})
 
 if __name__ == '__main__':
     app.run(debug=True)
